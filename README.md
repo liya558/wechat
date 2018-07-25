@@ -27,6 +27,7 @@
 #zabbix中使用方法。
 #在zabbix报警媒介类型的脚本参数中定义，默认在此全部接收
 #（下面是以1为收件人，2为通知信息处理方法，其它也全部发出。信息中有特殊符号时注意转义）。
+
 #def parameter():
 #        par = sys.argv[1:]
 #        if not sys.stdin.isatty():
