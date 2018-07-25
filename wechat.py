@@ -11,7 +11,7 @@ sys.setdefaultencoding('utf-8')
 #####################配置参数#####################
 #一、微信参数
 #企业微信通知人
-qy_wechart_user = 'liya'
+qy_wechart_user = 'user'
 #企业微信认证URL
 authentiaction_URL = 'https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={0}&corpsecret={1}'
 #企业微信发送消息URL
