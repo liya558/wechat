@@ -3,23 +3,21 @@
 ###V1-2018-05-16###
 #####################引入库#####################
 import sys,time
-import urllib2,urllib3,json,requests
+import urllib2,json,requests
 ###################初始配置#####################
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-reload(sys)
 sys.setdefaultencoding('utf-8')
 #####################配置参数#####################
 #一、微信参数
 #企业微信通知人
-qy_wechart_user = 'user'
+#qy_wechart_user = 'user'
 #企业微信认证URL
 authentiaction_URL = 'https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={0}&corpsecret={1}'
 #企业微信发送消息URL
 send_URL = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={0}"
 #企业微信ID
-corpid = "wxe****************"
+corpid = 'wx*************'
 #企业微信应用密钥
-corpsecret = "Vk*****************************************"
+corpsecret = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 
 #######################获取微信接口认证密钥（Token)#####################
 class Token(object):
@@ -43,8 +41,7 @@ class Token(object):
 ##########################发送微信消息########################
 def send_msg(content):
     qs_token = Token(corpid=corpid, corpsecret=corpsecret).get_token()
-    url = send_URL.format(
-        qs_token)
+    url = send_URL.format(qs_token)
     payload = {
         "touser": qy_wechart_user,
         "msgtype": "text",
@@ -55,3 +52,23 @@ def send_msg(content):
         "safe": "0"
     }
     requests.post(url, data=json.dumps(payload, ensure_ascii=False) ,verify=False)
+
+
+
+#zabbix中使用方法。
+#在zabbix报警媒介类型的脚本参数中定义，默认在此全部接收
+#（下面是以1为收件人，2为通知信息处理方法，其它也全部发出。信息中有特殊符号时注意转义）。
+def parameter():
+        par = sys.argv[1:]
+        if not sys.stdin.isatty():
+                par.append(sys.stdin.read())
+        return(par)
+notify = parameter()
+try:
+    qy_wechart_user = notify[0]
+    content = str(notify[1])
+    for i in range(2,len(notify)):
+        content += '\n'+notify[i]
+    if __name__ == '__main__':
+        send_msg(content)
+except Exception as e:print(e)
