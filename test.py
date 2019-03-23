@@ -1,29 +1,40 @@
 #!/usr/bin/env python
 # coding:utf-8
-###V1-2018-05-16###
+###V2-2018-07-27###
 #####################引入库#####################
 import sys,time
 import urllib2,json,requests
 ###################初始配置#####################
 sys.setdefaultencoding('utf-8')
 #####################配置参数#####################
-#一、微信参数
-#企业微信通知人
-#qy_wechart_user = 'user'
-#企业微信认证URL
 authentiaction_URL = 'https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={0}&corpsecret={1}'
-#企业微信发送消息URL
 send_URL = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={0}"
-#企业微信ID
 corpid = 'wx*************'
-#企业微信应用密钥
 corpsecret = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 
-#######################获取微信接口认证密钥（Token)#####################
+class sendWechat():
+    def __init__():
+        self corpid = 'wx*************'
+        self corpsecret = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    def setting(self,corpid,corpsecret,aURL,sURL):
+        pass
+
+def get_token():
+    corp_id = 'wxe3c6b69513aba8ce'
+    corp_secret = 'Vks0za_0KyN3q2k8dRFv-WE5nh1hTwAHCeHCwpNBnyo'
+    url = 'https://qyapi.weixin.qq.com/cgi-bin/gettoken'
+    carry ={'corpid':corp_id,'corpsecret':corp_secret}
+    try:
+        textmod = urllib.urlencode(carry)
+        request = urllib2.Request(url+'?'+textmod)
+        res = urllib2.urlopen(request).read()
+        result = json.loads(res)
+        if result.has_key('access_token'):
+            return(result['access_token'])
+        else:raise('获取Token错误：'+str(result['errmsg']))
+    except Exception,e:print(e)
+
 class Token(object):
-    def __init__(self, corpid, corpsecret):
-        self.baseurl = authentiaction_URL.format(corpid, corpsecret)
-        self.expire_time = sys.maxint
 
     def get_token(self):
         if self.expire_time > time.time():
