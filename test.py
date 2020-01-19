@@ -20,8 +20,8 @@ class sendWechat():
         pass
 
 def get_token():
-    corp_id = 'wxe3c6b69513aba8ce'
-    corp_secret = 'Vks0za_0KyN3q2k8dRFv-WE5nh1hTwAHCeHCwpNBnyo'
+    corp_id = 'wxe3c6b2951a3ba8ce'
+    corp_secret = 'Vks0za_0KyN3q2Ba8dRFv-WE5nhAdTwAHCeHCwpNBnyo'
     url = 'https://qyapi.weixin.qq.com/cgi-bin/gettoken'
     carry ={'corpid':corp_id,'corpsecret':corp_secret}
     try:
